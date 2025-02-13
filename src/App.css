@@ -62,3 +62,7 @@ svg {
 .explore-search {
   border: 1px solid currentColor ;
 }
+
+svg.selected {
+  stroke: red;
+}

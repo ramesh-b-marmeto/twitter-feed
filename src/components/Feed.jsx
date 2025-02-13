@@ -1,26 +1,32 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import PostCard from './PostCard';
 import { useSelector } from 'react-redux';
+import Pagination from './Pagination';
 
 const Feed = () => {
 
   const feeds = useSelector(store => store.feed);
   const params = useParams();
   console.log(params);
-  const filterParam = params?.tag ;
-  let filteredFeeds ;
-  if(filterParam){
+  const filterParam = params?.tag;
+
+  const [pageNum, setPageNum] = useState(parseInt(params?.pageNum) || 1);
+
+  console.log("pageNum", pageNum);
+  let filteredFeeds;
+  if (filterParam) {
     filteredFeeds = useMemo(() => feeds?.filter(feed => feed.post_text.includes(`#${filterParam}`)), [feeds]);
   }
   else {
-    filteredFeeds = feeds ;
+    filteredFeeds = feeds;
   }
+  let perPage = 10;
+  // let paginatedFeeds = filteredFeeds?.slice(pageNum-1*perPage,pageNum*perPage);
+  let paginatedFeeds = filteredFeeds?.slice((pageNum - 1) * perPage, pageNum * perPage);
+  console.log("paginatedFeeds", paginatedFeeds)
 
-  let paginatedFeeds = filteredFeeds?.slice(0,10);
-  console.log(filteredFeeds)
-
-  if(!feeds) {
+  if (!feeds) {
     return
   }
 
@@ -35,13 +41,21 @@ const Feed = () => {
         <h3 className='theme-border w-fit text-2xl font-semibold text-center pb-2'>For you</h3>
       </div>
       <div className='feed-posts--wrapper flex flex-col items-center mt-6'>
-        {paginatedFeeds.map((feed)=>{
+        {paginatedFeeds.length !== 0 ? paginatedFeeds.map((feed) => {
           return (
-          <div key={feed.id} className='main-card--wrapper'>
-            <PostCard post={feed}/>
-          </div>
+            <div key={feed.id} className='main-card--wrapper'>
+              <PostCard post={feed} />
+            </div>
           )
-        })}
+        }) : <h2 className='text-4xl text-center my-auto'>You all caught up</h2>}
+      </div>
+      <div className='pagination--wrapper flex justify-center pb-4'>
+        <Pagination
+          pageNum={pageNum}
+          perPage={perPage}
+          totalItems={filteredFeeds.length}
+          onPageChange={setPageNum}
+        />
       </div>
     </div>
   )

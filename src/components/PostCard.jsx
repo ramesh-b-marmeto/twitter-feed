@@ -2,8 +2,18 @@ import React from 'react'
 import Like from '../assets/Like'
 import Bookmark from '../assets/BookMark'
 import RetweetIcon from '../assets/Retweet'
+import { useDispatch } from 'react-redux'
+import { updateLike } from '../utils/feedSlice'
 
 const PostCard = ({ post , key }) => {
+
+  const dispatch = useDispatch();
+
+  const likeHandler = ()=>{
+    console.log(post.name , 'clicked');
+    dispatch(updateLike(post.id));
+  }
+
   return (
       <div className='post-card--wrapper max-w-[600px] py-4' key={key}>
         <div className='post-user-profile flex gap-2'>
@@ -20,7 +30,7 @@ const PostCard = ({ post , key }) => {
           </div>
           <div className='post-stats flex justify-around'>
             <div className='flex gap-1 items-center'>
-              <Like className={'cursor-pointer'}/>
+              <Like className={ post.isLiked ? 'cursor-pointer selected ' : 'cursor-pointer '} onClick={likeHandler} />
               {post.stats.likes}
             </div>
             <div className='flex gap-1 items-center'>
