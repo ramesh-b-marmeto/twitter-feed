@@ -1,22 +1,64 @@
 :root {
-  --font-color: black;
+  --font-color: rgb(0,0,0);
+  --theme-color : 0,0,0 ;
   --background-color: #eee;
   --link-color: cornflowerblue;
 }
 
-/* 2 */
 [data-theme="dark"] {
   --font-color: #eee;
-  --background-color: black;
-  --link-color: lightblue;
+  --theme-color : 255,255 ,255;
+  --background-color: rgb(0,0,0);
+  --link-color: rgb(29, 155, 240);
 }
 
-/* 3 */
 body {
   background-color: var(--background-color);
   color: var(--font-color);
+  transition: all 0.4s ease;
 }
 
 a {
   color: var(--link-color);
+}
+
+svg {
+   stroke : currentColor;
+}
+
+.hashtag {
+  color: var(--link-color);
+}
+
+.image-container {
+  width: 100%; /* Makes it responsive */
+  max-width: 800px; /* Ensures it doesn’t get larger than the image */
+  aspect-ratio: 4 / 3; /* 800 / 600 = 4:3 ratio */
+  background-color: #ddd; /* Placeholder */
+  position: relative;
+  overflow: hidden;
+}
+
+.main-card--wrapper:not(:last-child)  {
+  border-bottom: 1px solid rgba(var(--theme-color) , 0.4 );
+}
+
+.theme-border {
+  border-bottom: 4px solid var(--link-color);
+}
+
+.side-navbar{
+  border-right: 4px solid rgba(var(--theme-color) , 0.4 );
+  height: 100dvh;
+  padding-right: 2%;
+}
+
+.exlore-side-bar {
+  border-left: 4px solid rgba(var(--theme-color) , 0.4 );
+  height: 100dvh;
+  padding-left: 2%;
+}
+
+.explore-search {
+  border: 1px solid currentColor ;
 }

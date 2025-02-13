@@ -12,6 +12,9 @@ function App() {
         <BrowserRouter basename="/">
           <Routes>
             <Route path="/" element={<Body />} />
+            <Route path="/filter/:tag" element={<Body />} />
+            <Route path="/filter/:tag/page/:pageNum" element={<Body />} />
+            <Route path="/page/:pageNum" element={<Body />} />
           </Routes>
         </BrowserRouter>
       </Provider>

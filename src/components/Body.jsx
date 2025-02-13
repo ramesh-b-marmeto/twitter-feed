@@ -12,16 +12,36 @@ const Body = () => {
 
   const dispatch = useDispatch();
 
+  const toggleTheme = ()=>{
+    if(document.body.dataset.theme === "dark"){
+      document.body.dataset.theme = "default"
+    }
+    else {
+      document.body.dataset.theme = "dark"
+    }
+  }
+
   useEffect(() => {
-    dispatch(addFeed(jsonData));
+    if(localStorage.getItem("feedData")){
+      const exisitingFeedDataJSON = localStorage.getItem("feedData");
+      const exisitingFeedData = JSON.parse(exisitingFeedDataJSON);
+      dispatch(addFeed(exisitingFeedData));
+      console.log('setting data from exisiting localStorage');
+    }
+    else {
+      dispatch(addFeed(jsonData));
+      localStorage.setItem("feedData" , JSON.stringify(jsonData));
+      console.log('setting data from fetched feedData');
+    }
   }, [])
 
 
   return (
-    <div className='flex max-w-[1200px] mx-auto'>
+    <div className='flex max-w-[1200px] mx-auto px-4'>
       <NavBar />
       <Feed />
       <Explore />
+      <button className='fixed right-0 top-2' onClick={toggleTheme}>🌓</button>
     </div>
   )
 }
