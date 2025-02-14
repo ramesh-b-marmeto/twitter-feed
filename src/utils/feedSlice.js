@@ -8,12 +8,16 @@ const feedSlice = createSlice({
       return action.payload;
     },
     updateLike : (state , action) => {
-      console.log("state",state)
-      console.log("action",action.payload)
-      let id = action.payload ;
+      const { id , type }= action.payload ;
       const feed = state.find((feed)=>feed.id === id);
-      feed.isLiked = true;
-
+      if(type === 'add'){
+        feed.stats.likes = parseInt(feed.stats.likes)+1;
+        feed.isLiked = true;
+      }
+      else {
+        feed.stats.likes = parseInt(feed.stats.likes)-1;
+        feed.isLiked = false;
+      }
       localStorage.setItem("feedData" , JSON.stringify(state));
     }
   }

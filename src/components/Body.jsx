@@ -7,11 +7,13 @@ import NavBar from './NavBar';
 import Feed from './Feed';
 import Explore from './Explore';
 import DarkLight from '../assets/DarkLight';
+import { useNavigate } from 'react-router-dom';
 
 
 const Body = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const toggleTheme = ()=>{
     if(document.body.dataset.theme === "dark"){
@@ -22,7 +24,19 @@ const Body = () => {
     }
   }
 
+  const addEventListeners = ()=>{
+    window.addEventListener('click',(e)=>{
+      if(e.target.closest('.hashtag')){
+        let hashtag = e.target.innerText.trim().split('#')[1];
+        navigate(`/filter/${hashtag}`);
+      }
+    })
+  }
+
   useEffect(() => {
+
+    addEventListeners();
+
     if(localStorage.getItem("feedData")){
       const exisitingFeedDataJSON = localStorage.getItem("feedData");
       const exisitingFeedData = JSON.parse(exisitingFeedDataJSON);

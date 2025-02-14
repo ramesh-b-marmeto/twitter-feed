@@ -17,8 +17,9 @@ const Pagination = ({ pageNum, perPage, totalItems, onPageChange }) => {
   const handlePageChange = (newPage) => {
     onPageChange(newPage);
     
-    // Preserve existing path and replace the page number
-    const updatedPath = location.pathname.replace(/(\/page\/\d+)?$/, `/page/${newPage}`);
+    // Determine the base path and append the new page number correctly
+    const basePath = location.pathname.replace(/\/page\/\d+$/, "").replace(/\/$/, "");
+    const updatedPath = `${basePath}/page/${newPage}`;
     navigate(updatedPath);
     
     window.scrollTo({ top: 0, behavior: "smooth" });

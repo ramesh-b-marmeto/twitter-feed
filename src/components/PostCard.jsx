@@ -5,13 +5,22 @@ import RetweetIcon from '../assets/Retweet'
 import { useDispatch } from 'react-redux'
 import { updateLike } from '../utils/feedSlice'
 
-const PostCard = ({ post , key }) => {
+const PostCard = ({ post , key , index }) => {
 
   const dispatch = useDispatch();
+  let lazy = true ;
+
+  if(index === 0){
+    lazy = false ;
+  }
 
   const likeHandler = ()=>{
-    console.log(post.name , 'clicked');
-    dispatch(updateLike(post.id));
+    if(post.isLiked){
+      dispatch(updateLike({id : post.id , type : 'remove' }));
+    }
+    else {
+      dispatch(updateLike({id : post.id , type : 'add' }));
+    }
   }
 
   return (
@@ -26,7 +35,7 @@ const PostCard = ({ post , key }) => {
             <p dangerouslySetInnerHTML={{ __html: post.post_text }}></p>
           </div>
           <div className='image-container post-image w-full  rounded-md'>
-            <img src={post.post_media_url} alt="post image" className='w-full h-auto' />
+            <img src={post.post_media_url} alt="post image" className='w-full h-auto' fetchPriority={ lazy ? 'low' : 'high'} loading={ lazy ? 'lazy' : 'eager'}  />
           </div>
           <div className='post-stats flex justify-around'>
             <div className='flex gap-1 items-center'>

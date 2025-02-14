@@ -28,6 +28,7 @@ svg {
 
 .hashtag {
   color: var(--link-color);
+  cursor: pointer;
 }
 
 .image-container {
@@ -45,6 +46,7 @@ svg {
 
 .theme-border {
   border-bottom: 4px solid var(--link-color);
+  border-radius: 2px;
 }
 
 .side-navbar{

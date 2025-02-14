@@ -7,9 +7,9 @@ const Explore = () => {
       <div className='w-[150px] rounded-full py-8'>
         <h3 className='text-xl pb-4'>Trending now </h3>
         <ul className='list-none space-y-4'>
-          <li className='hashtag'>#News</li>
-          <li className='hashtag'>#Sports</li>
-          <li className='hashtag'>#Movie</li>
+          <li className='hashtag'>#news</li>
+          <li className='hashtag'>#sports</li>
+          <li className='hashtag'>#movie</li>
           <li className='hashtag'>#AI</li>
         </ul>
       </div>
