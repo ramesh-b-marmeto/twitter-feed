@@ -29,6 +29,8 @@ const PostCard = ({ post , key , index }) => {
           <img className='rounded-full' src={post.profile_picture_url} alt="profile image" width={40} height={40} />
           <h3 className='font-bold'>{post.name}</h3>
           <h3 className='opacity-50'>{post.username}</h3>
+          <span className='opacity-50'>:</span>  
+          <span className='opacity-50'>{post.timeline}</span>
         </div>
         <div className='post-description pl-12 mt-[-12px] flex flex-col gap-4'>
           <div className='post-text'>
