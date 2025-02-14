@@ -67,4 +67,5 @@ svg {
 
 svg.selected {
   stroke: red;
+  fill: red;
 }
